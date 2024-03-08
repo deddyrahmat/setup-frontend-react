@@ -14,7 +14,7 @@ type FormType = {
     edit?: boolean;
 };
 
-function CreateUser() {
+function UpdateUser() {
     
 
     const navigate = useNavigate();
@@ -43,9 +43,9 @@ function CreateUser() {
 
     return (
         <div className="border rounded w-full py-3">
-            <FormUser handleSubmit={handleSubmit} isLoading={isLoading} />
+            <FormUser handleSubmit={handleSubmit} isLoading={isLoading} edit={true} />
         </div>
     );
 }
 
-export default CreateUser;
+export default UpdateUser;
