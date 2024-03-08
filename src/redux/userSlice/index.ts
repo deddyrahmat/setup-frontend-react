@@ -1,19 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ApiUsers from '../../config/Endpoints/users';
 
-// get token from localstorage
-const localAuth: any = localStorage.getItem("auth");
-
 // First, create the thunk
 export const fetchAllUsers = createAsyncThunk(
     "categories/fetchAllusers",
-    async () => {
-        const {token} = JSON.parse(localAuth);
-        // console.log('localAuth', token)
+    async (arg, { getState }) => {
+        const state:any = getState()
         const config = {
             headers: {
               "content-type": "application/json",
-              Authorization: `Bearer ${token}`,
+              "Authorization": `Bearer ${state.auth.token}`,
             },
           };
         const res = await ApiUsers.getAllUsers(config);
