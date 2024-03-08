@@ -4,7 +4,7 @@ import ApiUsers from '../../config/Endpoints/users';
 // First, create the thunk
 export const fetchAllUsers = createAsyncThunk(
     "categories/fetchAllusers",
-    async (arg, { getState }) => {
+    async (_arg, { getState }) => {
         const state:any = getState()
         const config = {
             headers: {

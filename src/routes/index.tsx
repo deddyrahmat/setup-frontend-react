@@ -5,6 +5,7 @@ import Navbar from "../components/organisms/Navbar";
 import PrivateRoute from "./PrivateRoute";
 import GuestRoute from "./GuestRoute";
 import PageLogin from "../pages/PageLogin";
+import UserRoute from "./UserRoute";
 
 export function LocationDisplay() {
   const location = useLocation();
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
           {
               path: "dashboard/*",
               element: <Home />,
+          },
+          {
+              path: "user/*",
+              element: <UserRoute />,
           },
       ],
   },
