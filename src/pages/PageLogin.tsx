@@ -39,13 +39,11 @@ function PageLogin() {
       };
       const res = await ApiAuth.Login(body, config);
       if (res?.data?.accessToken) {
-        console.log('res', res)
         dispatch(USER_LOGIN(res.data.accessToken));
         navigate("/dashboard")
       }
-    } catch (error) {
-      console.log('error', error)
-      toast.error("Terjadi kegagalan server. Silahkan coba kembali beberapa saat lagi");
+    } catch (error:any) {
+      toast.error(error?.response?.data?.message || "Terjadi kegagalan server. Silahkan coba kembali beberapa saat lagi");
     }
   };
 
