@@ -4,7 +4,6 @@ import { removeLocalStorage } from "../../utils/localstorage";
 export default function errorHandler(error: any) {
   if (error) {
     let message;
-    console.log("error", error);
 
     if (error.response) {
       if (error.response.data.statusCode === 400) {

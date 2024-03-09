@@ -1,4 +1,4 @@
-import { createBrowserRouter, useLocation } from "react-router-dom";
+import { createBrowserRouter, useLocation, Navigate } from "react-router-dom";
 import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Navbar from "../components/organisms/Navbar";
@@ -9,7 +9,6 @@ import UserRoute from "./UserRoute";
 
 export function LocationDisplay() {
   const location = useLocation();
-
   return <div data-testid="location-display">{location.pathname}</div>;
 }
 
@@ -30,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "user/*",
         element: <UserRoute />,
+      },
+      {
+        path: "",
+        element: <Navigate to="/dashboard" replace={true} />,
       },
     ],
   },
