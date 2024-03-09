@@ -43,9 +43,8 @@ function PageUser() {
                 },
             };
               const res = await ApiUser.deleteUser(config,id);
-              console.log('res', res)
                 toast.success(
-                    `Berhasil menghapus data `
+                    `Berhasil menghapus data ${res.data.name}`
                 );
                 dispatch(fetchAllUsers());
             } catch (error) {
