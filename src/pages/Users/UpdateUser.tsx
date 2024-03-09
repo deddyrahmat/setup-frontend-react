@@ -39,6 +39,7 @@ function UpdateUser() {
             };
             const res = await ApiUser.updateUser(values, config,id);
             if (res?.data) {
+                toast.success("Sukses update data")
                 navigate("/user")
             }
         } catch (error: any) {

@@ -34,6 +34,7 @@ function CreateUser() {
             };
             const res = await ApiUser.createUsers(values, config);
             if (res?.data) {
+                toast.success("Data berhasil ditambah")
                 navigate("/user")
             }
         } catch (error: any) {
