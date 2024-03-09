@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchAllUsers } from "../../redux/userSlice";
 import TableAllUser from "../../components/organisms/TableAllUser";
 import ApiUser from "../../config/Endpoints/users";
+import AModal from "../../components/atoms/AModal";
 
 function PageUser() {
   const userAll = useAppSelector((state: any) => {
@@ -14,6 +15,9 @@ function PageUser() {
   });
 
   const dispatch = useAppDispatch();
+
+  const [showModal, setShowModal] = useState(false);
+  const [dataDetailUser, setDataDetailUser]: any = useState([]);
 
   useEffect(() => {
     dispatch(fetchAllUsers());
@@ -53,18 +57,38 @@ function PageUser() {
     });
   };
 
+  const handleDetailUser = async (id: string | number) => {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const res = await ApiUser.detailUser(config, id);
+      setDataDetailUser(res.data);
+      setShowModal(true);
+    } catch (error) {
+      toast.error(
+        "Terjadi kegagalan server. Silahkan coba kembali beberapa saat lagi"
+      );
+    }
+  };
+
   return (
     <div className="flex items-center justify-center flex-col">
-      <h3 className="mb-10 text-blue-800 text-4xl">All User</h3>
-      <div>
-        <Link
-          to="/user/create"
-          className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Tambah Data
-        </Link>
+      <div className="flex justify-around items-center w-full mt-10">
+        <h3 className=" text-slate-900 text-2xl">All User</h3>
+        <div>
+          <Link
+            to="/user/create"
+            className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Tambah Data
+          </Link>
+        </div>
       </div>
-      <div className="mt-10">
+      <div className="mt-5">
         <TableAllUser
           titleHead={titleTable}
           data={userAll.data}
@@ -73,8 +97,24 @@ function PageUser() {
           deleteAction={(id: string | number) => {
             return handleDelete(id);
           }}
+          detailAction={(id: string | number) => {
+            return handleDetailUser(id);
+          }}
         />
       </div>
+      <AModal showModal={showModal} setShowModal={setShowModal}>
+        <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <div className="flex flex-col divide-y text-left">
+            <div className="pt-3">Nama : {dataDetailUser?.name}</div>
+            <div className="pt-3">Email : {dataDetailUser?.email}</div>
+            <div className="pt-3">Role : {dataDetailUser?.role?.name}</div>
+            <div className="pt-3">
+              Inactive :{" "}
+              {dataDetailUser?.role?.inactive ? "Aktif" : "Nonactive"}
+            </div>
+          </div>
+        </div>
+      </AModal>
     </div>
   );
 }

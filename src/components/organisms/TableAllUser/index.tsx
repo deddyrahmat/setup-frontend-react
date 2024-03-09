@@ -7,6 +7,7 @@ function TableAllUser({
   bodyTable,
   editUrl,
   deleteAction,
+  detailAction,
 }: any) {
   return (
     <MTable
@@ -15,6 +16,7 @@ function TableAllUser({
       bodyTable={bodyTable}
       editUrl={editUrl}
       deleteAction={deleteAction}
+      detailAction={detailAction}
     />
   );
 }

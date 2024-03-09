@@ -9,6 +9,7 @@ function ATBody({
   editUrl,
   deleteAction,
   actionNotDisplay,
+  detailAction,
 }: any) {
   const navigate = useNavigate();
   return (
@@ -30,10 +31,21 @@ function ATBody({
               )}
 
               {!actionNotDisplay && (
-                <td>
+                <td className="flex flex-col justify-center md:justify-between md:items-end md:flex-row  px-6 py-4">
+                  {detailAction && (
+                    <FieldButton
+                      type="button"
+                      classNames="mx-3 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                      onClick={() => {
+                        return detailAction(item.id);
+                      }}
+                    >
+                      Detail
+                    </FieldButton>
+                  )}
                   {editUrl && (
                     <FieldButton
-                      classNames="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      classNames="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
                       onClick={() => {
                         setLocalStorage("user", {
                           name: item.name,

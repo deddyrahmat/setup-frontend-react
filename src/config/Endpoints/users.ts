@@ -9,4 +9,6 @@ export default {
     Axios.patch(`/users/${id}`, body, config).then((res) => res),
   deleteUser: (config: object, id: any) =>
     Axios.delete(`/users/${id}`, config).then((res) => res),
+  detailUser: (config: object, id: any) =>
+    Axios.get(`/users/${id}`, config).then((res) => res),
 };
