@@ -97,8 +97,8 @@ function FormUser({
                                 <FieldInput
                                     type="password"
                                     name="password"
-                                    label="password"
-                                    placeholder="password"
+                                    label={edit ? "New Password" : "password"}
+                                    placeholder={edit ? "New Password" : "password"}
                                     errors={errors?.password}
                                     touched={touched?.password}
                                     size="w-100"
