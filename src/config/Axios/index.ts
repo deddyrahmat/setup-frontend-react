@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const Axios = axios.create({
-    baseURL: `${import.meta.env.VITE_REACT_API}`,
-  });
+  baseURL: `${import.meta.env.VITE_REACT_API}`,
+});
 
-  export default Axios
+export default Axios;
