@@ -64,7 +64,7 @@ function FormUser({
                                     touched={touched?.name}
                                     size="w-100"
                                     onChange={handleChange}
-                                    valueField={values.name}
+                                    valueField={values.name || ''}
                                 />
                             </div>
                             <div className="mb-2">
@@ -77,7 +77,7 @@ function FormUser({
                                     touched={touched?.email}
                                     size="w-100"
                                     onChange={handleChange}
-                                    valueField={values.email}
+                                    valueField={values.email || ''}
                                 />
                             </div>
                             <div className="mb-2">
@@ -90,7 +90,7 @@ function FormUser({
                                     touched={touched?.roleId}
                                     size="w-100"
                                     onChange={handleChange}
-                                    valueField={values.roleId}
+                                    valueField={values.roleId || 0}
                                 />
                             </div>
                             <div className="mb-2">
@@ -103,7 +103,7 @@ function FormUser({
                                     touched={touched?.password}
                                     size="w-100"
                                     onChange={handleChange}
-                                    valueField={values.password}
+                                    valueField={values.password || ''}
                                 />
                             </div>
                             <div className="mb-2">
