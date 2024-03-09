@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAppSelector } from '../redux/hooks';
+import * as React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAppSelector } from "../redux/hooks";
 
 export default function GuestRoute({ children }: any) {
   const { token } = useAppSelector((state: any) => {

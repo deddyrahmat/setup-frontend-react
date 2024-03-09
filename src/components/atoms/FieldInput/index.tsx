@@ -1,5 +1,5 @@
-import { memo, ReactEventHandler, ReactNode } from 'react';
-import { Field } from 'formik';
+import { memo, ReactEventHandler, ReactNode } from "react";
+import { Field } from "formik";
 
 type Props = {
   label?: string;
@@ -20,20 +20,20 @@ const FieldInput = memo(function Input({
   size,
   valueField,
   placeholder,
-  errors = '',
+  errors = "",
   touched = false,
   isDisabled,
   type,
   onChange,
 }: Props) {
   const className = `${
-    isDisabled ? 'pe-none bg-slate' : 'bg-light'
+    isDisabled ? "pe-none bg-slate" : "bg-light"
   } placeholder:text-slate-400 text-dark fs-6 focus-ring focus-ring-blue-500 py-1 px-2 text-decoration-none border rounded-2 w-100 h-100`;
 
   const classSuccess =
-    'focus-ring focus-ring-blue-500 py-1 px-2 text-decoration-none border rounded-2';
+    "focus-ring focus-ring-blue-500 py-1 px-2 text-decoration-none border rounded-2";
   const classError =
-    'focus-ring focus-ring-slate-400 py-1 px-2 text-decoration-none border-2 rounded-2';
+    "focus-ring focus-ring-slate-400 py-1 px-2 text-decoration-none border-2 rounded-2";
 
   const Label = memo(function getLabel() {
     return (

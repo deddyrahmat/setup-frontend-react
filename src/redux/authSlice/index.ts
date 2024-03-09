@@ -1,17 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
 type authSliceType = {
   token: string | null;
 };
 
-const localAuth: any = localStorage.getItem('auth');
+const localAuth: any = localStorage.getItem("auth");
 const initialState: authSliceType = localAuth
   ? JSON.parse(localAuth)
   : { token: null };
 
 export const UserSlice = createSlice({
-  name: 'userAuth',
+  name: "userAuth",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
@@ -20,7 +20,7 @@ export const UserSlice = createSlice({
     },
     USER_LOGOUT: (state) => {
       state.token = null;
-      localStorage.removeItem('auth');
+      localStorage.removeItem("auth");
     },
   },
 });

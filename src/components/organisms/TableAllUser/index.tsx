@@ -1,5 +1,5 @@
-import React from 'react';
-import MTable from '../../molecules/MTable';
+import React from "react";
+import MTable from "../../molecules/MTable";
 
 function TableAllUser({
   titleHead,

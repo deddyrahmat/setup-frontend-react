@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { toast } from 'react-toastify';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { fetchAllUsers } from '../../redux/userSlice';
-import TableAllUser from '../../components/organisms/TableAllUser';
-import ApiUser from '../../config/Endpoints/users';
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchAllUsers } from "../../redux/userSlice";
+import TableAllUser from "../../components/organisms/TableAllUser";
+import ApiUser from "../../config/Endpoints/users";
 
 function PageUser() {
   const userAll = useAppSelector((state: any) => {
@@ -19,25 +19,25 @@ function PageUser() {
     dispatch(fetchAllUsers());
   }, [dispatch]);
 
-  const titleTable = ['User ID', 'Name', 'Email', 'Role ID', 'Action'];
+  const titleTable = ["User ID", "Name", "Email", "Role ID", "Action"];
 
   const { token } = useAppSelector((state: any) => state.auth);
   const handleDelete = async (id: string | number) => {
     Swal.fire({
-      title: 'Apa kamu yakin?',
-      text: 'Anda tidak akan dapat mengembalikan ini!',
-      icon: 'warning',
+      title: "Apa kamu yakin?",
+      text: "Anda tidak akan dapat mengembalikan ini!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Iya, Hapus',
-      cancelButtonText: 'Batal',
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Iya, Hapus",
+      cancelButtonText: "Batal",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           const config = {
             headers: {
-              'content-type': 'application/json',
+              "content-type": "application/json",
               Authorization: `Bearer ${token}`,
             },
           };
@@ -46,7 +46,7 @@ function PageUser() {
           dispatch(fetchAllUsers());
         } catch (error) {
           toast.error(
-            'Terjadi kegagalan server. Silahkan coba kembali beberapa saat lagi'
+            "Terjadi kegagalan server. Silahkan coba kembali beberapa saat lagi"
           );
         }
       }
@@ -68,7 +68,7 @@ function PageUser() {
         <TableAllUser
           titleHead={titleTable}
           data={userAll.data}
-          bodyTable={['name', 'email', 'roleId', 'id']}
+          bodyTable={["name", "email", "roleId", "id"]}
           editUrl="/user/update"
           deleteAction={(id: string | number) => {
             return handleDelete(id);

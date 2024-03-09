@@ -1,12 +1,12 @@
 /* eslint-disable react/button-has-type */
-import React, { useEffect, useState, ReactEventHandler } from 'react';
+import React, { useEffect, useState, ReactEventHandler } from "react";
 
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import ApiUser from '../../config/Endpoints/users';
-import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import FormUser from '../../components/organisms/FormUser';
-import { getLocalStorage } from '../../utils/localstorage';
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import ApiUser from "../../config/Endpoints/users";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import FormUser from "../../components/organisms/FormUser";
+import { getLocalStorage } from "../../utils/localstorage";
 
 type FormType = {
   dataUser?: any;
@@ -17,9 +17,9 @@ function UpdateUser() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [itemEdit, setItemEdit] = useState({ name: '' });
+  const [itemEdit, setItemEdit] = useState({ name: "" });
   useEffect(() => {
-    setItemEdit(getLocalStorage('user'));
+    setItemEdit(getLocalStorage("user"));
   }, []);
 
   const { token } = useAppSelector((state: any) => state.auth);
@@ -30,19 +30,19 @@ function UpdateUser() {
 
       const config = {
         headers: {
-          'content-type': 'application/json',
+          "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       };
       const res = await ApiUser.updateUser(values, config, id);
       if (res?.data) {
-        toast.success('Sukses update data');
-        navigate('/user');
+        toast.success("Sukses update data");
+        navigate("/user");
       }
     } catch (error: any) {
       toast.error(
         error?.response?.data?.message[0] ||
-          'Terjadi kegagalan server. Silahkan coba kembali beberapa saat lagi'
+          "Terjadi kegagalan server. Silahkan coba kembali beberapa saat lagi"
       );
     }
   };

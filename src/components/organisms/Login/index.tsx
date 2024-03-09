@@ -1,6 +1,6 @@
-import React from 'react';
-import AInput from '../../atoms/AInput';
-import AButton from '../../atoms/AButton';
+import React from "react";
+import AInput from "../../atoms/AInput";
+import AButton from "../../atoms/AButton";
 
 type Data = {
   email: string;
@@ -45,9 +45,9 @@ function Login({ email, password, onChange, onSubmit, isLoading }: Data) {
           placeholder="******"
         />
       </div>
-      <AButton content={isLoading ? 'Loading' : 'Login'} />
+      <AButton content={isLoading ? "Loading" : "Login"} />
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-        Don’t have an account yet?{' '}
+        Don’t have an account yet?{" "}
         <a
           href="#"
           className="font-medium text-blue-600 hover:underline dark:text-blue-500"

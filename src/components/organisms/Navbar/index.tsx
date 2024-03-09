@@ -1,8 +1,8 @@
-import React from 'react';
-import { useAppDispatch } from '../../../redux/hooks';
-import { USER_LOGOUT } from '../../../redux/authSlice';
-import { useNavigate } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { useAppDispatch } from "../../../redux/hooks";
+import { USER_LOGOUT } from "../../../redux/authSlice";
+import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   const dispatch = useAppDispatch();
@@ -10,7 +10,7 @@ function Navbar() {
 
   const handleLogout = () => {
     dispatch(USER_LOGOUT());
-    navigate('/login');
+    navigate("/login");
   };
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">

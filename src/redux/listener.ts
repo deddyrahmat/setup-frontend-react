@@ -1,4 +1,4 @@
-import storeRedux from './store';
+import storeRedux from "./store";
 
 let currentAuth: any;
 
@@ -6,7 +6,7 @@ function listener() {
   const previousAuth = currentAuth;
   currentAuth = storeRedux.getState().auth;
   if (currentAuth !== previousAuth) {
-    localStorage.setItem('auth', JSON.stringify(currentAuth));
+    localStorage.setItem("auth", JSON.stringify(currentAuth));
   }
 }
 

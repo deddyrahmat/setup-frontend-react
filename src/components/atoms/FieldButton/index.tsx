@@ -1,8 +1,8 @@
-import { memo, ReactEventHandler, ReactNode } from 'react';
+import { memo, ReactEventHandler, ReactNode } from "react";
 
 type Props = {
   classNames?: string;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   isLoading?: boolean;
   isDisabled?: boolean;
   children?: ReactNode;
@@ -11,7 +11,7 @@ type Props = {
 
 const FieldButton = memo(function FButton({
   classNames,
-  type = 'button',
+  type = "button",
   isLoading,
   isDisabled,
   onClick,
@@ -24,7 +24,7 @@ const FieldButton = memo(function FButton({
       onClick={onClick}
       disabled={isDisabled}
     >
-      {isLoading ? 'Loading...' : children}
+      {isLoading ? "Loading..." : children}
     </button>
   );
 });

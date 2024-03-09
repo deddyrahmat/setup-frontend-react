@@ -1,6 +1,6 @@
-import React from 'react';
-import ATHead from '../../atoms/ATHead';
-import ATBody from '../../atoms/ATBody';
+import React from "react";
+import ATHead from "../../atoms/ATHead";
+import ATBody from "../../atoms/ATBody";
 
 function MTable({ titleHead, data, bodyTable, editUrl, deleteAction }: any) {
   return (

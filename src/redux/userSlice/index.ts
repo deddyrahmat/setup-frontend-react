@@ -1,14 +1,14 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import ApiUsers from '../../config/Endpoints/users';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import ApiUsers from "../../config/Endpoints/users";
 
 // First, create the thunk
 export const fetchAllUsers = createAsyncThunk(
-  'categories/fetchAllusers',
+  "categories/fetchAllusers",
   async (_arg, { getState }) => {
     const state: any = getState();
     const config = {
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
         Authorization: `Bearer ${state.auth.token}`,
       },
     };
@@ -30,7 +30,7 @@ const initialState: UserSliceType = {
 };
 
 export const UserSlice = createSlice({
-  name: 'user',
+  name: "user",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {

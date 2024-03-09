@@ -1,8 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import PageUser from '../pages/Users/PageUser';
-import CreateUser from '../pages/Users/CreateUser';
-import UpdateUser from '../pages/Users/UpdateUser';
+import PageUser from "../pages/Users/PageUser";
+import CreateUser from "../pages/Users/CreateUser";
+import UpdateUser from "../pages/Users/UpdateUser";
 
 export default function UserRoute() {
   return (

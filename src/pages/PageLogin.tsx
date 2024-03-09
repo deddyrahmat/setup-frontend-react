@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import { useAppDispatch } from '../redux/hooks';
-import { USER_LOGIN } from '../redux/authSlice';
-import Login from '../components/organisms/Login';
-import ApiAuth from '../config/Endpoints/auth';
+import { useAppDispatch } from "../redux/hooks";
+import { USER_LOGIN } from "../redux/authSlice";
+import Login from "../components/organisms/Login";
+import ApiAuth from "../config/Endpoints/auth";
 
 function PageLogin() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -34,18 +34,18 @@ function PageLogin() {
 
       const config = {
         headers: {
-          'content-type': 'application/json',
+          "content-type": "application/json",
         },
       };
       const res = await ApiAuth.Login(body, config);
       if (res?.data?.accessToken) {
         dispatch(USER_LOGIN(res.data.accessToken));
-        navigate('/dashboard');
+        navigate("/dashboard");
       }
     } catch (error: any) {
       toast.error(
         error?.response?.data?.message ||
-          'Terjadi kegagalan server. Silahkan coba kembali beberapa saat lagi'
+          "Terjadi kegagalan server. Silahkan coba kembali beberapa saat lagi"
       );
     }
   };
