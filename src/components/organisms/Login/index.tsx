@@ -1,4 +1,3 @@
-import React from "react";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import FieldButton from "../../atoms/FieldButton";
@@ -26,7 +25,6 @@ function Login({ isLoading = false, handleSubmit }: FormType) {
         }}
         validationSchema={AuthSchema}
         onSubmit={(values) => {
-          // console.log("values", values);
           // same shape as initial values
           handleSubmit(values);
         }}

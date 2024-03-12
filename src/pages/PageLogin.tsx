@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -10,16 +10,9 @@ import ApiAuth from "../config/Endpoints/auth";
 function PageLogin() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  };
   const onSubmit = async (values: any) => {
     //Preventing page refresh
 
