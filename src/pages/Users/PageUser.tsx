@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchAllUsers } from "../../redux/userSlice";
 import TableAllUser from "../../components/organisms/TableAllUser";
 import ApiUser from "../../config/Endpoints/users";
 import AModal from "../../components/atoms/AModal";
+import ReportUser from "./../../reports/ReportUser";
 
 function PageUser() {
   const userAll = useAppSelector((state: any) => {
@@ -79,13 +81,25 @@ function PageUser() {
     <div className="flex items-center justify-center flex-col">
       <div className="flex justify-around items-center w-full mt-10">
         <h3 className=" text-slate-900 text-2xl">All User</h3>
-        <div>
-          <Link
-            to="/user/create"
-            className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Tambah Data
-          </Link>
+        <div className="flex justify-center items-center gap-4">
+          <div>
+            <Link
+              to="/user/create"
+              className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Tambah Data
+            </Link>
+          </div>
+          <div>
+            <PDFDownloadLink
+              document={<ReportUser data={userAll.data} />}
+              fileName="report-user.pdf"
+            >
+              <div className="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                Report All User
+              </div>
+            </PDFDownloadLink>
+          </div>
         </div>
       </div>
       <div className="mt-5">
