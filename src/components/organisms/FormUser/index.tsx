@@ -88,7 +88,7 @@ function FormUser({
                   placeholder="Nama User"
                   errors={errors?.name}
                   touched={touched?.name}
-                  size="w-full bg-red-900"
+                  size="w-full "
                   onChange={handleChange}
                   valueField={values.name || ""}
                 />
@@ -101,7 +101,7 @@ function FormUser({
                   placeholder="Email User"
                   errors={errors?.email}
                   touched={touched?.email}
-                  size="w-full bg-red-900"
+                  size="w-full "
                   onChange={handleChange}
                   valueField={values.email || ""}
                 />
@@ -110,7 +110,7 @@ function FormUser({
                 <FieldSelect
                   nameP="roleId"
                   options={selectRole}
-                  size="w-full bg-red-900"
+                  size="w-full "
                   label="Role User"
                 />
               </div>
@@ -122,7 +122,7 @@ function FormUser({
                   placeholder={edit ? "New Password" : "password"}
                   errors={errors?.password}
                   touched={touched?.password}
-                  size="w-full bg-red-900"
+                  size="w-full "
                   onChange={handleChange}
                   valueField={values.password || ""}
                 />
