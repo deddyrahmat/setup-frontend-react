@@ -10,6 +10,7 @@ import TableAllUser from "../../components/organisms/TableAllUser";
 import ApiUser from "../../config/Endpoints/users";
 import AModal from "../../components/atoms/AModal";
 import ReportUser from "./../../reports/ReportUser";
+import ReportUserExcel from "../../reports/ReportUserExcel";
 
 function PageUser() {
   const userAll = useAppSelector((state: any) => {
@@ -99,6 +100,9 @@ function PageUser() {
                 Report All User
               </div>
             </PDFDownloadLink>
+          </div>
+          <div>
+            <ReportUserExcel data={userAll.data} />
           </div>
         </div>
       </div>
