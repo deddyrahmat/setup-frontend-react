@@ -48,7 +48,7 @@ function UpdateUser() {
   };
 
   return (
-    <div className="border rounded w-full py-3">
+    <div className="border rounded w-full p-10">
       <FormUser
         handleSubmit={handleSubmit}
         isLoading={isLoading}

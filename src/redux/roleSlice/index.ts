@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ApiUsers from "../../config/Endpoints/users";
+import ApiRole from "../../config/Endpoints/role";
 
 // First, create the thunk
-export const fetchAllUsers = createAsyncThunk(
-  "users/fetchAllusers",
+export const fetchAllRoles = createAsyncThunk(
+  "roles/fetchAllRoles",
   async (_arg, { getState }) => {
     const state: any = getState();
     const config = {
@@ -12,47 +12,47 @@ export const fetchAllUsers = createAsyncThunk(
         Authorization: `Bearer ${state.auth.token}`,
       },
     };
-    const res = await ApiUsers.getAllUsers(config);
+    const res = await ApiRole.getAllRole(config);
 
     return res.data;
   }
 );
 
 // Define a type for the slice state
-type UserSliceType = {
+type roleSliceType = {
   data: [];
   isLoading: boolean;
 };
 
-const initialState: UserSliceType = {
+const initialState: roleSliceType = {
   data: [],
   isLoading: false,
 };
 
-export const UserSlice = createSlice({
-  name: "user",
+export const RoleSlice = createSlice({
+  name: "role",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    USER_ALL: (state, action) => {
+    ROLE_ALL: (state, action) => {
       state.data = action.payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllUsers.pending, (state) => {
+    builder.addCase(fetchAllRoles.pending, (state) => {
       state.data = [];
       state.isLoading = true;
     });
-    builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
+    builder.addCase(fetchAllRoles.fulfilled, (state, action) => {
       state.data = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(fetchAllUsers.rejected, (state, action) => {
+    builder.addCase(fetchAllRoles.rejected, (state, action) => {
       state.isLoading = false;
     });
   },
 });
 
-export const { USER_ALL } = UserSlice.actions;
+export const { ROLE_ALL } = RoleSlice.actions;
 
-export default UserSlice.reducer;
+export default RoleSlice.reducer;

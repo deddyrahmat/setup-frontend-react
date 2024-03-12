@@ -20,7 +20,8 @@ function CreateUser() {
   const handleSubmit = async (values: any) => {
     try {
       setIsLoading(true);
-      // const {name, roleId, email, password} = values;
+      const { name, roleId, email, password } = values;
+      const role = Number(roleId);
 
       const config = {
         headers: {
@@ -28,7 +29,13 @@ function CreateUser() {
           Authorization: `Bearer ${token}`,
         },
       };
-      const res = await ApiUser.createUsers(values, config);
+      const body = JSON.stringify({
+        name,
+        roleId: role,
+        email,
+        password,
+      });
+      const res = await ApiUser.createUsers(body, config);
       if (res?.data) {
         toast.success("Data berhasil ditambah");
         navigate("/user");
@@ -42,7 +49,7 @@ function CreateUser() {
   };
 
   return (
-    <div className="border rounded w-full py-3">
+    <div className="border rounded w-full p-10">
       <FormUser handleSubmit={handleSubmit} isLoading={isLoading} />
     </div>
   );

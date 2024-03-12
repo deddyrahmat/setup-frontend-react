@@ -1,31 +1,31 @@
-import { memo, ReactEventHandler, ReactNode } from "react";
-import { Field } from "formik";
+import { useState, useEffect, memo } from "react";
+import { useField } from "formik";
 
 type Props = {
   label?: string;
-  name: string;
+  nameP: string;
+  options: [];
   size?: string;
-  valueField?: string;
-  errors?: ReactNode;
-  touched?: boolean;
   isDisabled?: boolean;
-  placeholder: string;
-  type: string;
-  onChange?: any;
 };
 
-const FieldInput = memo(function Input({
-  label,
-  name,
+function Select({
+  nameP = "",
   size,
-  valueField,
-  placeholder,
-  errors = "",
-  touched = false,
+  options,
   isDisabled,
-  type,
-  onChange,
+  label,
+  ...otherProps
 }: Props) {
+  const [field, mata] = useField(nameP);
+
+  const [notifError, setNotifError] = useState("text-red-900");
+
+  const configTextfield: any = {
+    ...field,
+    ...otherProps,
+  };
+
   const className = `${
     isDisabled ? "pe-none bg-slate" : "bg-light"
   } placeholder:text-slate-400 text-dark fs-6 focus-ring focus-ring-blue-500 py-1 px-2 text-decoration-none border rounded-2 w-full`;
@@ -33,12 +33,12 @@ const FieldInput = memo(function Input({
   const classSuccess =
     "focus-ring focus-ring-blue-500 py-1 px-2 text-decoration-none border rounded-2";
   const classError =
-    "focus-ring focus-ring-slate-400 py-1 px-2 text-decoration-none border-2 rounded-2";
+    "focus-ring focus-ring-red-400 py-1 px-2 text-decoration-none border-2 rounded-2";
 
   const Label = memo(function getLabel() {
     return (
       <label
-        htmlFor={name}
+        htmlFor={nameP}
         className="text-gray-300 font-semibold text-sm lg:text-base"
       >
         {label}
@@ -46,13 +46,13 @@ const FieldInput = memo(function Input({
     );
   });
   const SectionError = memo(function getErr() {
-    return errors && touched ? (
+    return mata.error && mata.touched ? (
       <div
         className="text-red-400 fs-6 fs-semibold mt-1"
-        id={`${name}-helper-text`}
+        id={`${nameP}-helper-text`}
         aria-live="assertive"
       >
-        {errors}
+        {mata.error}
       </div>
     ) : null;
   });
@@ -61,23 +61,23 @@ const FieldInput = memo(function Input({
     <>
       <Label />
       <div className={`position-relative ${size}`}>
-        <Field
-          aria-errormessage={`${name}-helper-text`}
-          aria-invalid="true"
-          name={name}
-          id={name}
-          type={type}
+        <select
+          name={nameP}
           className={`p-2 ${className} ${
-            errors && touched ? classError : classSuccess
+            mata.error && mata.touched ? classError : classSuccess
           }`}
-          onChange={onChange}
-          value={valueField}
-          placeholder={placeholder}
-        />
+          disabled={isDisabled}
+          {...configTextfield}
+        >
+          <option value="">- - -</option>
+          {options?.map((opt: any) => (
+            <option key={opt.id} value={opt.value} label={opt.label} />
+          ))}
+        </select>
       </div>
       <SectionError />
     </>
   );
-});
+}
 
-export default FieldInput;
+export default memo(Select);
