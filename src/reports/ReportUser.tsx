@@ -98,7 +98,11 @@ const ReportUser = ({ data }: any) => {
   );
 
   const TableHead = () => (
-    <View fixed style={{ width: "100%", flexDirection: "row", marginTop: 10 }}>
+    <View
+      fixed
+      // fixed={data.length > 20 && true}
+      style={{ width: "100%", flexDirection: "row", marginTop: 10 }}
+    >
       <View style={styles.theader}>
         <Text>User ID</Text>
       </View>
@@ -177,12 +181,16 @@ const ReportUser = ({ data }: any) => {
 
   return (
     <Document>
-      <Page size="A4" orientation="landscape" style={styles.page}>
+      <Page size="A4" orientation="landscape" style={styles.page} wrap>
         <ReportTitle />
-        <TableHead />
-        <TableBody />
-        <TableHead2 />
-        <TableBody2 />
+        <View minPresenceAhead={10}>
+          <TableHead />
+          <TableBody />
+        </View>
+        <View minPresenceAhead={10}>
+          <TableHead2 />
+          <TableBody2 />
+        </View>
       </Page>
     </Document>
   );

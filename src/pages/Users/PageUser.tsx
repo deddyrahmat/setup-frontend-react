@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { BlobProvider, PDFDownloadLink } from "@react-pdf/renderer";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchAllUsers } from "../../redux/userSlice";
@@ -92,12 +92,23 @@ function PageUser() {
             </Link>
           </div>
           <div>
-            <Link
+            <BlobProvider document={<ReportUser data={userAll.data} />}>
+              {({ url }: any) => (
+                <a
+                  href={url}
+                  target="_blank"
+                  className="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-blue-800"
+                >
+                  Download PDF
+                </a>
+              )}
+            </BlobProvider>
+            {/* <Link
               to="/user/download-all"
               className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Download pdf
-            </Link>
+            </Link> */}
           </div>
           <div>
             <ReportUserExcel data={userAll.data} />
