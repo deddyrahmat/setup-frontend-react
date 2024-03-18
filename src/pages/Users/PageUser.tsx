@@ -78,6 +78,10 @@ function PageUser() {
     }
   };
 
+  const dw = (url: any) => {
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="flex items-center justify-center flex-col">
       <div className="flex justify-around items-center w-full mt-10">
@@ -94,13 +98,7 @@ function PageUser() {
           <div>
             <BlobProvider document={<ReportUser data={userAll.data} />}>
               {({ url }: any) => (
-                <a
-                  href={url}
-                  target="_blank"
-                  className="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-blue-800"
-                >
-                  Download PDF
-                </a>
+                <button onClick={() => dw(url)}>download</button>
               )}
             </BlobProvider>
             {/* <Link

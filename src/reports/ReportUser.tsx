@@ -13,7 +13,7 @@ import logo from "/logo_psg.png";
 const ReportUser = ({ data }: any) => {
   const styles = StyleSheet.create({
     descLogo: {
-      paddingTop: 15,
+      paddingTop: 10,
     },
     descCompany: {
       fontSize: 10,
@@ -26,11 +26,15 @@ const ReportUser = ({ data }: any) => {
     logo: { width: 90 },
     page: {
       fontSize: 11,
-      paddingTop: 20,
+      paddingTop: 15,
       paddingLeft: 40,
       paddingRight: 40,
+      paddingBottom: 25,
       lineHeight: 1.5,
       flexDirection: "column",
+    },
+    container: {
+      marginBottom: 60,
     },
 
     spaceBetween: {
@@ -41,7 +45,7 @@ const ReportUser = ({ data }: any) => {
       color: "#3E3E3E",
     },
 
-    titleContainer: { flexDirection: "row", marginTop: 24 },
+    titleContainer: { flexDirection: "row", marginTop: 15 },
 
     reportTitle: { fontSize: 16, textAlign: "center" },
 
@@ -49,14 +53,18 @@ const ReportUser = ({ data }: any) => {
       marginTop: 20,
       fontSize: 10,
       fontStyle: "bold",
-      paddingTop: 4,
+      paddingTop: 7,
       paddingLeft: 7,
       flex: 1,
-      height: 20,
-      backgroundColor: "#DEDEDE",
-      borderColor: "whitesmoke",
+      minHeight: 20,
+      borderColor: "black",
       borderRightWidth: 1,
       borderBottomWidth: 1,
+      borderTopWidth: 1,
+    },
+
+    tBorderLeft: {
+      borderLeftWidth: 1,
     },
 
     theader2: { flex: 2, borderRightWidth: 0, borderBottomWidth: 1 },
@@ -66,19 +74,26 @@ const ReportUser = ({ data }: any) => {
       paddingTop: 4,
       paddingLeft: 7,
       flex: 1,
-      borderColor: "whitesmoke",
+      borderColor: "black",
       borderRightWidth: 1,
       borderBottomWidth: 1,
     },
 
     tbody2: { flex: 2, borderRightWidth: 1 },
+
+    footer: {
+      position: "absolute",
+      bottom: 0,
+      left: 50,
+      borderTop: "1px solid #C4C4C4",
+    },
   });
 
   const ReportTitle = () => (
-    <View style={styles.titleContainer}>
+    <View style={styles.titleContainer} fixed>
       <View style={styles.spaceBetween}>
         <View>
-          <Image style={styles.logo} src={logo} />
+          {/* <Image style={styles.logo} src={logo} /> */}
           <View style={styles.descLogo}>
             <Text style={styles.descCompany}>
               Desa Air Tawar, Kateman, Riau, 29255, Indonesia
@@ -103,7 +118,7 @@ const ReportUser = ({ data }: any) => {
       // fixed={data.length > 20 && true}
       style={{ width: "100%", flexDirection: "row", marginTop: 10 }}
     >
-      <View style={styles.theader}>
+      <View style={[styles.theader, styles.tBorderLeft]}>
         <Text>User ID</Text>
       </View>
       <View style={styles.theader}>
@@ -122,7 +137,7 @@ const ReportUser = ({ data }: any) => {
     data.map((item: any) => (
       <Fragment key={item.id}>
         <View style={{ width: "100%", flexDirection: "row" }}>
-          <View style={styles.tbody}>
+          <View style={[styles.tbody, styles.tBorderLeft]}>
             <Text>{item.id}</Text>
           </View>
           <View style={styles.tbody}>
@@ -140,11 +155,11 @@ const ReportUser = ({ data }: any) => {
   const TableHead2 = () => (
     <View
       fixed
-      // break
-      // wrap={false}
       style={{ width: "100%", flexDirection: "row", marginTop: 10 }}
+      // wrap={false}
+      // break
     >
-      <View style={styles.theader}>
+      <View style={[styles.theader, styles.tBorderLeft]}>
         <Text>User ID</Text>
       </View>
       <View style={styles.theader}>
@@ -162,8 +177,8 @@ const ReportUser = ({ data }: any) => {
   const TableBody2 = () =>
     data.map((item: any) => (
       <Fragment key={item.id}>
-        <View style={{ width: "100%", flexDirection: "row" }}>
-          <View style={styles.tbody}>
+        <View style={{ width: "100%", flexDirection: "row" }} wrap={false}>
+          <View style={[styles.tbody, styles.tBorderLeft]}>
             <Text>{item.id}</Text>
           </View>
           <View style={styles.tbody}>
@@ -179,17 +194,60 @@ const ReportUser = ({ data }: any) => {
       </Fragment>
     ));
 
+  const Footer = () => {
+    for (let no = 1; no <= 2; no++) {
+      return (
+        <View
+          fixed
+          style={{ width: "100%", flexDirection: "row", marginTop: 10 }}
+        >
+          <View style={styles.theader}>
+            <Text>Document No. 566 - Page {no} from 2</Text>
+          </View>
+        </View>
+      );
+    }
+  };
+
   return (
     <Document>
-      <Page size="A4" orientation="landscape" style={styles.page} wrap>
-        <ReportTitle />
-        <View minPresenceAhead={10}>
-          <TableHead />
-          <TableBody />
+      <Page size="A4" orientation="landscape" style={styles.page}>
+        <View style={styles.container}>
+          <ReportTitle />
+          <Text
+            render={({ pageNumber, totalPages }) =>
+              `${pageNumber} / ${totalPages}`
+            }
+            fixed
+          />
+          <View>
+            <TableHead />
+            <TableBody />
+          </View>
+          <View>
+            <TableHead2 />
+            <TableBody2 />
+          </View>
+          <View break>
+            <TableHead2 />
+            <TableBody2 />
+          </View>
+          <View break>
+            <TableHead2 />
+            <TableBody2 />
+          </View>
         </View>
-        <View minPresenceAhead={10}>
-          <TableHead2 />
-          <TableBody2 />
+        <View break>
+          <View>
+            <TableHead2 />
+            <TableBody2 />
+          </View>
+          <Text
+            render={({ pageNumber, totalPages }) =>
+              `${pageNumber} / ${totalPages}`
+            }
+            fixed
+          />
         </View>
       </Page>
     </Document>
